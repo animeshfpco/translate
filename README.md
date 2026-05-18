@@ -8,6 +8,9 @@ The goal is a frictionless always-on overlay: you hear Japanese, you read Englis
 
 ## How it works
 
+Two pipeline modes are supported:
+
+**Default (ASR + LLM MT)**
 ```
 System audio
     │
@@ -16,18 +19,22 @@ Audio capture (WASAPI loopback / PulseAudio monitor)
     │  raw PCM frames @ 16 kHz mono
     ▼
 VAD — Silero VAD (ONNX, CPU)
-    │  finalizes a chunk on ~300 ms silence or 8 s hard cap
+    │  finalizes a chunk on silence gap or hard cap
     ▼
 ASR — faster-whisper (int8)
     │  emits Japanese transcript; shown in overlay immediately
     ▼
 MT — llama-cpp-python (Q4_K_M GGUF)
-    │  translates JA → EN with rolling 4-turn context window
+    │  translates JA → EN with rolling 2-turn context window
     ▼
-Overlay — PySide6 always-on-top dual-pane window
-           top pane: Japanese transcript
-           bottom pane: English translation
+Overlay — English translation
 ```
+
+**Bilingual mode (`--bilingual`)** — single model, lower latency
+```
+System audio → VAD → ASR (Whisper task=translate) → Overlay — English translation
+```
+Whisper translates JA→EN directly in one pass. No LLM is loaded. Best for CPU-only setups where LLM latency is a bottleneck.
 
 Each stage runs on its own thread. The ASR and MT threads pull from bounded queues, so back-pressure is handled automatically and the UI stays responsive even if MT falls behind.
 
@@ -37,8 +44,9 @@ Each stage runs on its own thread. The ASR and MT threads pull from bounded queu
 |---|---|---|---|
 | **Audio** | system loopback | — | WASAPI on Windows, PulseAudio/PipeWire monitor on Linux |
 | **VAD** | Silero VAD (ONNX) | ~2 MB | 512-sample windows @ 16 kHz; speech threshold 0.5 |
-| **ASR** | `deepdml/faster-whisper-large-v3-turbo-ct2` (int8) | ~1.5 GB | greedy decode (`beam_size=1`) for speed; swap to `kotoba-whisper-v2.0-faster` for GPU |
-| **MT** | `LiquidAI/LFM2.5-1.2B-JP-GGUF` Q4_K_M | ~731 MB | JA→EN specialist; fallback: `Qwen2.5-1.5B-Instruct` Q4_K_M |
+| **ASR** | `Systran/faster-whisper-small` (int8) | ~240 MB | greedy decode (`beam_size=1`); upgrade to `kotoba-whisper-v2.0-faster` for GPU |
+| **ASR (bilingual)** | `kotoba-tech/kotoba-whisper-bilingual-v1.0-faster` | ~1.5 GB | Whisper `task=translate`; used with `--bilingual` |
+| **MT** | `LiquidAI/LFM2.5-1.2B-JP-GGUF` Q4_K_M | ~731 MB | JA→EN specialist; fallback: `Qwen2.5-1.5B-Instruct` Q4_K_M; skipped in bilingual mode |
 | **UI** | PySide6 overlay | — | always-on-top, dual-pane, transparent background |
 
 ### Why threads, not async?
@@ -56,19 +64,23 @@ Each stage runs on its own thread. The ASR and MT threads pull from bounded queu
 
 ```bash
 uv sync
-uv run translate
+uv run translate                  # default: ASR + LLM MT
+uv run translate --bilingual      # Whisper translate only, no LLM
+uv run translate --bilingual --asr-model Systran/faster-whisper-small  # lighter CPU option
+uv run translate --device cuda    # GPU acceleration
 ```
 
-First run downloads ~2 GB of model weights to the HuggingFace cache (`~/.cache/huggingface`). Subsequent starts load from disk in a few seconds.
+First run downloads model weights to the HuggingFace cache (`~/.cache/huggingface`). Subsequent starts load from disk in a few seconds.
 
 ## Configuration
 
 All tuneable parameters live in [src/translate/config.py](src/translate/config.py). Key knobs:
 
-- `ASRConfig.model` — swap to a smaller model (`faster-whisper-small`) for faster CPU inference at the cost of accuracy
-- `ASRConfig.device` — set to `"cuda"` to offload Whisper to GPU and switch to `kotoba-whisper-v2.0-faster` for best JA quality
-- `VADConfig.silence_ms` — lower to finalize chunks faster (more responsive, shorter context per chunk)
-- `MTConfig.context_pairs` — number of previous (JA, EN) pairs fed as context into the MT model (default 4)
+- `ASRConfig.model` — default ASR model used in normal mode
+- `ASRConfig.bilingual_model` — model used when `--bilingual` is passed (defaults to `kotoba-whisper-bilingual-v1.0-faster`)
+- `ASRConfig.device` — set to `"cuda"` to offload Whisper to GPU
+- `VADConfig.silence_ms` — silence gap before a chunk is finalized; lower = more responsive but shorter context per chunk
+- `MTConfig.context_pairs` — rolling (JA, EN) pairs fed as context to the MT model (default 2; keep low for small models)
 
 ## Status
 
