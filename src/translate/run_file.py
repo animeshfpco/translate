@@ -54,9 +54,22 @@ def chunk_audio_by_frames(audio: np.ndarray, frame_samples: int) -> list[np.ndar
     return frames
 
 
-def run(audio_path: Path, cfg: Config) -> dict:
+def run(
+    audio_path: Path,
+    cfg: Config,
+    bilingual: bool = False,
+    with_transcription: bool = True,
+) -> dict:
+    """Run pipeline on `audio_path`.
+
+    Modes:
+      - Default (bilingual=False): ASR (JA) → LlamaMT (EN). Two models.
+      - Bilingual (bilingual=True): ASR-only model emits EN directly (Whisper
+        task="translate"). If with_transcription=True, do a second ASR pass for
+        the JA source. No LlamaMT.
+    """
     asr = WhisperASR(cfg.asr)
-    mt = LlamaMT(cfg.mt)
+    mt = None if bilingual else LlamaMT(cfg.mt)
     vad = VADChunker(cfg.vad, cfg.audio.sample_rate)
 
     log.info("Loading audio: %s", audio_path)
@@ -69,10 +82,12 @@ def run(audio_path: Path, cfg: Config) -> dict:
     asr.prewarm()
     asr_load_s = time.monotonic() - t0
 
-    log.info("Warming up MT model (%s)…", cfg.mt.model_repo)
-    t0 = time.monotonic()
-    mt.prewarm()
-    mt_load_s = time.monotonic() - t0
+    mt_load_s = 0.0
+    if mt is not None:
+        log.info("Warming up MT model (%s)…", cfg.mt.model_repo)
+        t0 = time.monotonic()
+        mt.prewarm()
+        mt_load_s = time.monotonic() - t0
 
     frame_samples = cfg.audio.sample_rate * cfg.audio.frame_ms // 1000
     frames = chunk_audio_by_frames(audio, frame_samples)
@@ -82,29 +97,54 @@ def run(audio_path: Path, cfg: Config) -> dict:
     results_chunks = []
     for i, chunk in enumerate(chunks):
         chunk_duration_s = len(chunk) / cfg.audio.sample_rate
-        log.info("ASR chunk %d/%d (%.2fs)…", i + 1, len(chunks), chunk_duration_s)
+        log.info("Chunk %d/%d (%.2fs)…", i + 1, len(chunks), chunk_duration_s)
 
-        t0 = time.monotonic()
-        transcript = asr.transcribe(chunk)
-        asr_time_s = time.monotonic() - t0
-        log.info("  transcribed in %.2fs: %r", asr_time_s, transcript.text)
+        transcription_text = ""
+        asr_time_s = 0.0
+        detected_language = cfg.asr.language
+        asr_duration_s = chunk_duration_s
 
-        translation_text = ""
-        mt_time_s = 0.0
-        if transcript.text:
+        if bilingual:
+            # Primary call → translation (EN). Optional second call → JA source.
             t0 = time.monotonic()
-            translation = mt.translate(transcript.text)
+            translation = asr.translate(chunk)
             mt_time_s = time.monotonic() - t0
-            translation_text = translation.target
-            log.info("  translated in %.2fs: %r", mt_time_s, translation_text)
+            translation_text = translation.text
+            detected_language = translation.language
+            asr_duration_s = translation.duration_s
+            log.info("  translated (ASR) in %.2fs: %r", mt_time_s, translation_text)
+
+            if with_transcription and translation_text:
+                t0 = time.monotonic()
+                transcript = asr.transcribe(chunk)
+                asr_time_s = time.monotonic() - t0
+                transcription_text = transcript.text
+                log.info("  transcribed in %.2fs: %r", asr_time_s, transcription_text)
+        else:
+            t0 = time.monotonic()
+            transcript = asr.transcribe(chunk)
+            asr_time_s = time.monotonic() - t0
+            transcription_text = transcript.text
+            detected_language = transcript.language
+            asr_duration_s = transcript.duration_s
+            log.info("  transcribed in %.2fs: %r", asr_time_s, transcription_text)
+
+            translation_text = ""
+            mt_time_s = 0.0
+            if transcription_text:
+                t0 = time.monotonic()
+                tr = mt.translate(transcription_text)
+                mt_time_s = time.monotonic() - t0
+                translation_text = tr.target
+                log.info("  translated (LLM) in %.2fs: %r", mt_time_s, translation_text)
 
         results_chunks.append(
             {
                 "chunk_index": i,
                 "chunk_duration_s": round(chunk_duration_s, 4),
-                "transcription": transcript.text,
-                "detected_language": transcript.language,
-                "asr_duration_s": transcript.duration_s,
+                "transcription": transcription_text,
+                "detected_language": detected_language,
+                "asr_duration_s": asr_duration_s,
                 "asr_time_s": round(asr_time_s, 4),
                 "translation": translation_text,
                 "mt_time_s": round(mt_time_s, 4),
@@ -115,6 +155,8 @@ def run(audio_path: Path, cfg: Config) -> dict:
         "file_name": audio_path.name,
         "file_path": str(audio_path.resolve()),
         "timestamp": datetime.now(timezone.utc).isoformat(),
+        "mode": "bilingual" if bilingual else "asr+llm",
+        "with_transcription": with_transcription if bilingual else True,
         "total_audio_duration_s": round(total_duration_s, 4),
         "num_chunks": len(chunks),
         "models": {
@@ -122,8 +164,8 @@ def run(audio_path: Path, cfg: Config) -> dict:
             "asr_device": cfg.asr.device,
             "asr_compute_type": cfg.asr.compute_type,
             "asr_language": cfg.asr.language,
-            "mt_model_repo": cfg.mt.model_repo,
-            "mt_model_file": cfg.mt.model_file,
+            "mt_model_repo": None if bilingual else cfg.mt.model_repo,
+            "mt_model_file": None if bilingual else cfg.mt.model_file,
         },
         "load_times": {
             "asr_load_s": round(asr_load_s, 4),
@@ -165,6 +207,16 @@ def main() -> None:
     parser.add_argument("--mt-model", default=None, help="Override MT model repo")
     parser.add_argument("--device", default=None, choices=["cpu", "cuda", "auto"], help="ASR device")
     parser.add_argument("--out-dir", type=Path, default=RESULTS_DIR, help="Directory for JSON results")
+    parser.add_argument(
+        "--bilingual",
+        action="store_true",
+        help="Use ASR model directly for translation (Whisper task=translate); skips LLM MT.",
+    )
+    parser.add_argument(
+        "--no-transcription",
+        action="store_true",
+        help="In --bilingual mode, skip the second pass that produces JA source text.",
+    )
     args = parser.parse_args()
 
     audio_path: Path = args.audio.resolve()
@@ -172,6 +224,9 @@ def main() -> None:
         raise SystemExit(f"Audio file not found: {audio_path}")
 
     cfg = Config()
+    # In --bilingual mode, default to the bilingual ASR model unless overridden.
+    if args.bilingual and not args.asr_model:
+        args.asr_model = cfg.asr.bilingual_model
     # Only rebuild sub-configs when CLI args explicitly override them.
     if args.asr_model or args.device:
         cfg = Config(
@@ -192,7 +247,12 @@ def main() -> None:
             mt=MTConfig(**{**cfg.mt.__dict__, "model_repo": args.mt_model}),
         )
 
-    record = run(audio_path, cfg)
+    record = run(
+        audio_path,
+        cfg,
+        bilingual=args.bilingual,
+        with_transcription=not args.no_transcription,
+    )
 
     results_path = args.out_dir / f"{audio_path.stem}.json"
     append_result(results_path, record)

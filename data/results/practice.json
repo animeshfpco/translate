@@ -252,5 +252,134 @@
         "mt_time_s": 0.9017
       }
     ]
+  },
+  {
+    "file_name": "practice.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/practice.mp3",
+    "timestamp": "2026-05-18T17:59:49.900196+00:00",
+    "mode": "bilingual",
+    "with_transcription": true,
+    "total_audio_duration_s": 49.9809,
+    "num_chunks": 10,
+    "models": {
+      "asr_model": "kotoba-tech/kotoba-whisper-bilingual-v1.0-faster",
+      "asr_device": "cpu",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": null,
+      "mt_model_file": null
+    },
+    "load_times": {
+      "asr_load_s": 253.1232,
+      "mt_load_s": 0.0
+    },
+    "vad_config": {
+      "silence_ms": 300,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 8000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 1.024,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.024,
+        "asr_time_s": 0.0,
+        "translation": "",
+        "mt_time_s": 6.5858
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 8.0,
+        "transcription": "どちらの国から来たのですか?",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 6.0252,
+        "translation": "本当にいらっしゃいであったんですか?",
+        "mt_time_s": 5.6424
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 1.024,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.024,
+        "asr_time_s": 0.0,
+        "translation": "",
+        "mt_time_s": 8.776
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 8.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.0,
+        "translation": "",
+        "mt_time_s": 5.9483
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 8.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.0,
+        "translation": "",
+        "mt_time_s": 5.214
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 1.568,
+        "transcription": "行かれるのですか?",
+        "detected_language": "ja",
+        "asr_duration_s": 1.568,
+        "asr_time_s": 4.6099,
+        "translation": "行かれるんですか?",
+        "mt_time_s": 5.706
+      },
+      {
+        "chunk_index": 6,
+        "chunk_duration_s": 7.328,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 7.328,
+        "asr_time_s": 0.0,
+        "translation": "",
+        "mt_time_s": 5.1985
+      },
+      {
+        "chunk_index": 7,
+        "chunk_duration_s": 3.232,
+        "transcription": "名古屋まで行く。",
+        "detected_language": "ja",
+        "asr_duration_s": 3.232,
+        "asr_time_s": 7.8251,
+        "translation": "〈に行きます〉は〉まで行きます。〉〉",
+        "mt_time_s": 31.6464
+      },
+      {
+        "chunk_index": 8,
+        "chunk_duration_s": 2.304,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 2.304,
+        "asr_time_s": 0.0,
+        "translation": "",
+        "mt_time_s": 5.2578
+      },
+      {
+        "chunk_index": 9,
+        "chunk_duration_s": 2.688,
+        "transcription": "どこに行かれる予定ですか?",
+        "detected_language": "ja",
+        "asr_duration_s": 2.688,
+        "asr_time_s": 4.6346,
+        "translation": "どこに行かれる予定ですか?",
+        "mt_time_s": 5.5172
+      }
+    ]
   }
 ]

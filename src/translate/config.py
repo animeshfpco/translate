@@ -29,6 +29,7 @@ class ASRConfig:
     initial_prompt: str | None = None
     beam_size: int = 1  # greedy; beam_size=5 is 5× slower on CPU with minimal quality gain
     large_model: str = "kotoba-tech/kotoba-whisper-v2.0-faster"  # JA-optimized large-v3; best with GPU
+    bilingual_model: str = "kotoba-tech/kotoba-whisper-bilingual-v1.0-faster"  # JA↔EN in one model; use with --bilingual
 
 
 @dataclass(frozen=True)

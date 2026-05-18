@@ -26,10 +26,18 @@ class WhisperASR(ASRWorker):
         self._ensure_loaded()
 
     def transcribe(self, audio: np.ndarray) -> Transcript:
+        return self._run(audio, task="transcribe")
+
+    def translate(self, audio: np.ndarray) -> Transcript:
+        """Use Whisper's built-in JA→EN translation task (bilingual models)."""
+        return self._run(audio, task="translate")
+
+    def _run(self, audio: np.ndarray, task: str) -> Transcript:
         model = self._ensure_loaded()
         audio = np.ascontiguousarray(audio, dtype=np.float32)
         segments, info = model.transcribe(
             audio,
+            task=task,
             language=self.cfg.language,
             beam_size=self.cfg.beam_size,
             initial_prompt=self.cfg.initial_prompt,
