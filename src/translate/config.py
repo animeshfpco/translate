@@ -22,7 +22,7 @@ class ASRConfig:
     # runs at ~0.5–1× real-time on CPU — use it only with a GPU.
     # For CPU: "Systran/faster-whisper-small" (~0.4 GB, ~6× real-time on CPU)
     #          "Systran/faster-whisper-medium" (~1.5 GB, ~3× real-time on CPU)
-    model: str = "deepdml/faster-whisper-large-v3-turbo-ct2"
+    model: str = "Systran/faster-whisper-small"
     compute_type: str = "int8"
     device: str = "cpu"  # cpu | cuda | auto
     language: str = "ja"

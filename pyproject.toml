@@ -12,13 +12,20 @@ dependencies = [
     "numpy>=2.0",
     "PySide6>=6.7",
     "huggingface-hub>=0.24",
+    "resampy>=0.4.3",
 ]
 
 [project.scripts]
 translate = "translate.cli:main"
 
 [dependency-groups]
-dev = ["ruff", "pytest", "ipykernel", "ipywidgets"]
+dev = [
+    "ruff",
+    "pytest",
+    "ipykernel",
+    "ipywidgets",
+    "soundfile>=0.13.1",
+]
 
 [build-system]
 requires = ["hatchling"]
