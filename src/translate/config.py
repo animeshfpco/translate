@@ -10,9 +10,9 @@ class AudioConfig:
 
 @dataclass(frozen=True)
 class VADConfig:
-    silence_ms: int = 300
+    silence_ms: int = 850
     min_chunk_ms: int = 1000
-    max_chunk_ms: int = 8000
+    max_chunk_ms: int = 20000
     speech_threshold: float = 0.5
 
 
@@ -29,7 +29,7 @@ class ASRConfig:
     initial_prompt: str | None = None
     beam_size: int = 1  # greedy; beam_size=5 is 5× slower on CPU with minimal quality gain
     large_model: str = "kotoba-tech/kotoba-whisper-v2.0-faster"  # JA-optimized large-v3; best with GPU
-    bilingual_model: str = "kotoba-tech/kotoba-whisper-bilingual-v1.0-faster"  # JA↔EN in one model; use with --bilingual
+    bilingual_model: str = "Systran/faster-whisper-small"  # JA↔EN in one model; use with --bilingual
 
 
 @dataclass(frozen=True)
@@ -42,7 +42,7 @@ class MTConfig:
     repeat_penalty: float = 1.05  # per LFM2.5-JP model card
     temperature: float = 0.2
     max_tokens: int = 256
-    context_pairs: int = 4  # rolling (ja, en) pairs fed back as MT context
+    context_pairs: int = 2  # rolling (ja, en) pairs fed back as MT context; keep low for small models
     fallback_repo: str = "Qwen/Qwen2.5-1.5B-Instruct-GGUF"
     fallback_file: str = "*q4_k_m.gguf"
 

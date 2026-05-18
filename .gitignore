@@ -11,3 +11,6 @@ wheels/
 
 # audio files
 *.mp3
+
+# claude local settings
+.claude

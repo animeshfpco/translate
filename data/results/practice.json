@@ -381,5 +381,392 @@
         "mt_time_s": 5.5172
       }
     ]
+  },
+  {
+    "file_name": "practice.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/practice.mp3",
+    "timestamp": "2026-05-18T18:10:35.059626+00:00",
+    "mode": "asr+llm",
+    "with_transcription": true,
+    "total_audio_duration_s": 49.9809,
+    "num_chunks": 10,
+    "models": {
+      "asr_model": "Systran/faster-whisper-small",
+      "asr_device": "cuda",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": "LiquidAI/LFM2.5-1.2B-JP-GGUF",
+      "mt_model_file": "*Q4_K_M.gguf"
+    },
+    "load_times": {
+      "asr_load_s": 2.8386,
+      "mt_load_s": 2.9976
+    },
+    "vad_config": {
+      "silence_ms": 300,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 8000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 1.024,
+        "transcription": "か?",
+        "detected_language": "ja",
+        "asr_duration_s": 1.024,
+        "asr_time_s": 0.5596,
+        "translation": "What?",
+        "mt_time_s": 0.4224
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 8.0,
+        "transcription": "どちらの国からいらっしゃったんですか",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.2343,
+        "translation": "I'm from the United States.",
+        "mt_time_s": 0.2956
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 1.024,
+        "transcription": "ん?",
+        "detected_language": "ja",
+        "asr_duration_s": 1.024,
+        "asr_time_s": 0.1263,
+        "translation": "What?",
+        "mt_time_s": 0.1385
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 8.0,
+        "transcription": "日本は初めてですか?",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.1469,
+        "translation": "No, Japan is not the first.",
+        "mt_time_s": 0.2987
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 8.0,
+        "transcription": "今日はどちらまで",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.1291,
+        "translation": "Today is the last day of the month.",
+        "mt_time_s": 0.305
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 1.568,
+        "transcription": "行かれるんですか",
+        "detected_language": "ja",
+        "asr_duration_s": 1.568,
+        "asr_time_s": 0.1218,
+        "translation": "I am going to go.",
+        "mt_time_s": 1.7216
+      },
+      {
+        "chunk_index": 6,
+        "chunk_duration_s": 7.328,
+        "transcription": "そうですか",
+        "detected_language": "ja",
+        "asr_duration_s": 7.328,
+        "asr_time_s": 0.1203,
+        "translation": "Yes, that's correct.",
+        "mt_time_s": 1.3735
+      },
+      {
+        "chunk_index": 7,
+        "chunk_duration_s": 3.232,
+        "transcription": "私は名古屋まで行きます",
+        "detected_language": "ja",
+        "asr_duration_s": 3.232,
+        "asr_time_s": 0.1612,
+        "translation": "I will go to Nagoya.",
+        "mt_time_s": 0.7712
+      },
+      {
+        "chunk_index": 8,
+        "chunk_duration_s": 2.304,
+        "transcription": "到着したら",
+        "detected_language": "ja",
+        "asr_duration_s": 2.304,
+        "asr_time_s": 0.1211,
+        "translation": "When I arrive,",
+        "mt_time_s": 0.711
+      },
+      {
+        "chunk_index": 9,
+        "chunk_duration_s": 2.688,
+        "transcription": "どこに行かれる予定ですか",
+        "detected_language": "ja",
+        "asr_duration_s": 2.688,
+        "asr_time_s": 0.1385,
+        "translation": "I plan to go to the train station.",
+        "mt_time_s": 0.8042
+      }
+    ]
+  },
+  {
+    "file_name": "practice.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/practice.mp3",
+    "timestamp": "2026-05-18T18:11:16.295913+00:00",
+    "mode": "asr+llm",
+    "with_transcription": true,
+    "total_audio_duration_s": 49.9809,
+    "num_chunks": 10,
+    "models": {
+      "asr_model": "Systran/faster-whisper-small",
+      "asr_device": "cuda",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": "LiquidAI/LFM2.5-1.2B-JP-GGUF",
+      "mt_model_file": "*Q4_K_M.gguf"
+    },
+    "load_times": {
+      "asr_load_s": 1.613,
+      "mt_load_s": 2.7104
+    },
+    "vad_config": {
+      "silence_ms": 300,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 8000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 1.024,
+        "transcription": "か?",
+        "detected_language": "ja",
+        "asr_duration_s": 1.024,
+        "asr_time_s": 0.5152,
+        "translation": "What?",
+        "mt_time_s": 0.9526
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 8.0,
+        "transcription": "どちらの国からいらっしゃったんですか",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.2099,
+        "translation": "I'm from the United States.",
+        "mt_time_s": 0.2788
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 1.024,
+        "transcription": "ん?",
+        "detected_language": "ja",
+        "asr_duration_s": 1.024,
+        "asr_time_s": 0.1189,
+        "translation": "What?",
+        "mt_time_s": 0.1294
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 8.0,
+        "transcription": "日本は初めてですか?",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.1341,
+        "translation": "No, Japan is not the first.",
+        "mt_time_s": 0.291
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 8.0,
+        "transcription": "今日はどちらまで",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.133,
+        "translation": "Today is the last day of the month.",
+        "mt_time_s": 0.6636
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 1.568,
+        "transcription": "行かれるんですか",
+        "detected_language": "ja",
+        "asr_duration_s": 1.568,
+        "asr_time_s": 0.1214,
+        "translation": "I am going to go.",
+        "mt_time_s": 1.1762
+      },
+      {
+        "chunk_index": 6,
+        "chunk_duration_s": 7.328,
+        "transcription": "そうですか",
+        "detected_language": "ja",
+        "asr_duration_s": 7.328,
+        "asr_time_s": 0.1757,
+        "translation": "Yes, that's correct.",
+        "mt_time_s": 0.7225
+      },
+      {
+        "chunk_index": 7,
+        "chunk_duration_s": 3.232,
+        "transcription": "私は名古屋まで行きます",
+        "detected_language": "ja",
+        "asr_duration_s": 3.232,
+        "asr_time_s": 0.1473,
+        "translation": "I will go to Nagoya.",
+        "mt_time_s": 0.7706
+      },
+      {
+        "chunk_index": 8,
+        "chunk_duration_s": 2.304,
+        "transcription": "到着したら",
+        "detected_language": "ja",
+        "asr_duration_s": 2.304,
+        "asr_time_s": 0.1258,
+        "translation": "When I arrive,",
+        "mt_time_s": 0.6993
+      },
+      {
+        "chunk_index": 9,
+        "chunk_duration_s": 2.688,
+        "transcription": "どこに行かれる予定ですか",
+        "detected_language": "ja",
+        "asr_duration_s": 2.688,
+        "asr_time_s": 0.1408,
+        "translation": "I plan to go to the train station.",
+        "mt_time_s": 1.5299
+      }
+    ]
+  },
+  {
+    "file_name": "practice.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/practice.mp3",
+    "timestamp": "2026-05-18T20:49:24.831691+00:00",
+    "mode": "bilingual",
+    "with_transcription": false,
+    "total_audio_duration_s": 49.9809,
+    "num_chunks": 10,
+    "models": {
+      "asr_model": "Systran/faster-whisper-small",
+      "asr_device": "cpu",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": null,
+      "mt_model_file": null
+    },
+    "load_times": {
+      "asr_load_s": 15.414,
+      "mt_load_s": 0.0
+    },
+    "vad_config": {
+      "silence_ms": 300,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 8000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 1.024,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.024,
+        "asr_time_s": 0.0,
+        "translation": "Should I?",
+        "mt_time_s": 1.6031
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 8.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.0,
+        "translation": "Which country did you come from?",
+        "mt_time_s": 2.1184
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 1.024,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.024,
+        "asr_time_s": 0.0,
+        "translation": "Thank you for watching!",
+        "mt_time_s": 1.0891
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 8.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.0,
+        "translation": "Is this your first time in Japan?",
+        "mt_time_s": 1.1549
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 8.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.0,
+        "translation": "Today, I'm going to show you",
+        "mt_time_s": 20.8231
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 1.568,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.568,
+        "asr_time_s": 0.0,
+        "translation": "Can you go?",
+        "mt_time_s": 1.588
+      },
+      {
+        "chunk_index": 6,
+        "chunk_duration_s": 7.328,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 7.328,
+        "asr_time_s": 0.0,
+        "translation": "Is that so?",
+        "mt_time_s": 1.1645
+      },
+      {
+        "chunk_index": 7,
+        "chunk_duration_s": 3.232,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 3.232,
+        "asr_time_s": 0.0,
+        "translation": "I'm going to Nagoya.",
+        "mt_time_s": 1.1837
+      },
+      {
+        "chunk_index": 8,
+        "chunk_duration_s": 2.304,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 2.304,
+        "asr_time_s": 0.0,
+        "translation": "When you arrive...",
+        "mt_time_s": 1.1181
+      },
+      {
+        "chunk_index": 9,
+        "chunk_duration_s": 2.688,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 2.688,
+        "asr_time_s": 0.0,
+        "translation": "Where are you going?",
+        "mt_time_s": 1.1469
+      }
+    ]
   }
 ]

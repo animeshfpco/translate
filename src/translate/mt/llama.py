@@ -39,5 +39,15 @@ class LlamaMT(MTWorker):
             repeat_penalty=self.cfg.repeat_penalty,
         )
         en = resp["choices"][0]["message"]["content"].strip()
-        self._context.append((text_ja, en))
+        # Only add to context if output looks valid (not a repetition loop).
+        if en and not _is_repetition(en):
+            self._context.append((text_ja, en))
         return Translation(source=text_ja, target=en)
+
+
+def _is_repetition(text: str, threshold: int = 4) -> bool:
+    """Detect if the model got stuck repeating the same sentence."""
+    sentences = [s.strip() for s in text.replace(".", ".\n").splitlines() if s.strip()]
+    if len(sentences) < threshold:
+        return False
+    return len(set(sentences)) <= 2

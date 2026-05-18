@@ -1,0 +1,1105 @@
+[
+  {
+    "file_name": "podcast_1.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/podcast_1.mp3",
+    "timestamp": "2026-05-18T21:00:42.230293+00:00",
+    "mode": "bilingual",
+    "with_transcription": false,
+    "total_audio_duration_s": 103.0209,
+    "num_chunks": 19,
+    "models": {
+      "asr_model": "Systran/faster-whisper-small",
+      "asr_device": "cpu",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": null,
+      "mt_model_file": null
+    },
+    "load_times": {
+      "asr_load_s": 2.8003,
+      "mt_load_s": 0.0
+    },
+    "vad_config": {
+      "silence_ms": 500,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 20000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 2.592,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 2.592,
+        "asr_time_s": 0.0,
+        "translation": "That's it.",
+        "mt_time_s": 4.0026
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 2.944,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 2.944,
+        "asr_time_s": 0.0,
+        "translation": "What is this? It's beautiful.",
+        "mt_time_s": 3.4856
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 2.272,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 2.272,
+        "asr_time_s": 0.0,
+        "translation": "and how to say it in a polite way.",
+        "mt_time_s": 3.4992
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 1.344,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.344,
+        "asr_time_s": 0.0,
+        "translation": "What was that?",
+        "mt_time_s": 1.0939
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 1.92,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.92,
+        "asr_time_s": 0.0,
+        "translation": "It was a mess.",
+        "mt_time_s": 2.9966
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 1.44,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.44,
+        "asr_time_s": 0.0,
+        "translation": "It's all formed.",
+        "mt_time_s": 4.0991
+      },
+      {
+        "chunk_index": 6,
+        "chunk_duration_s": 6.656,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 6.656,
+        "asr_time_s": 0.0,
+        "translation": "Well, this is different. These two types are different.",
+        "mt_time_s": 2.1214
+      },
+      {
+        "chunk_index": 7,
+        "chunk_duration_s": 1.312,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.312,
+        "asr_time_s": 0.0,
+        "translation": "That's all for today. Thanks for watching.",
+        "mt_time_s": 3.7343
+      },
+      {
+        "chunk_index": 8,
+        "chunk_duration_s": 4.352,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 4.352,
+        "asr_time_s": 0.0,
+        "translation": "I'm going to study at school.",
+        "mt_time_s": 1.1936
+      },
+      {
+        "chunk_index": 9,
+        "chunk_duration_s": 3.808,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 3.808,
+        "asr_time_s": 0.0,
+        "translation": "Oh, that's right.",
+        "mt_time_s": 1.1647
+      },
+      {
+        "chunk_index": 10,
+        "chunk_duration_s": 6.272,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 6.272,
+        "asr_time_s": 0.0,
+        "translation": "That's interesting. From the 5th grade...",
+        "mt_time_s": 1.1914
+      },
+      {
+        "chunk_index": 11,
+        "chunk_duration_s": 1.088,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.088,
+        "asr_time_s": 0.0,
+        "translation": "More.",
+        "mt_time_s": 1.0617
+      },
+      {
+        "chunk_index": 12,
+        "chunk_duration_s": 4.64,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 4.64,
+        "asr_time_s": 0.0,
+        "translation": "That's it. The study of the language is about to begin.",
+        "mt_time_s": 1.2537
+      },
+      {
+        "chunk_index": 13,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "Son kei go, kenjo go, for example, irassharu, me shiagaru, osharu, this is a special form of son kei go. I'm Kenjo Go, I'm Nani Nani, I'm Tanaka, I'm Moushima.",
+        "mt_time_s": 1.769
+      },
+      {
+        "chunk_index": 14,
+        "chunk_duration_s": 8.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 0.0,
+        "translation": "I don't like people like this.",
+        "mt_time_s": 4.2321
+      },
+      {
+        "chunk_index": 15,
+        "chunk_duration_s": 14.176,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 14.176,
+        "asr_time_s": 0.0,
+        "translation": "Maybe it's a good way to say I love you. That's when Japanese children are about 11 years old. They study at school since they were 11 years old.",
+        "mt_time_s": 1.4626
+      },
+      {
+        "chunk_index": 16,
+        "chunk_duration_s": 1.984,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.984,
+        "asr_time_s": 0.0,
+        "translation": "That's it.",
+        "mt_time_s": 1.1259
+      },
+      {
+        "chunk_index": 17,
+        "chunk_duration_s": 9.184,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 9.184,
+        "asr_time_s": 0.0,
+        "translation": "It's amazing, right? So I'm studying it at 11 years old. But the thing I actually use is...",
+        "mt_time_s": 1.357
+      },
+      {
+        "chunk_index": 18,
+        "chunk_duration_s": 1.952,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.952,
+        "asr_time_s": 0.0,
+        "translation": "I don't have much.",
+        "mt_time_s": 1.1418
+      }
+    ]
+  },
+  {
+    "file_name": "podcast_1.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/podcast_1.mp3",
+    "timestamp": "2026-05-18T21:03:17.415247+00:00",
+    "mode": "asr+llm",
+    "with_transcription": true,
+    "total_audio_duration_s": 103.0209,
+    "num_chunks": 19,
+    "models": {
+      "asr_model": "Systran/faster-whisper-small",
+      "asr_device": "cpu",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": "LiquidAI/LFM2.5-1.2B-JP-GGUF",
+      "mt_model_file": "*Q4_K_M.gguf"
+    },
+    "load_times": {
+      "asr_load_s": 1.8779,
+      "mt_load_s": 3.0168
+    },
+    "vad_config": {
+      "silence_ms": 500,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 20000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 2.592,
+        "transcription": "で、なになにです",
+        "detected_language": "ja",
+        "asr_duration_s": 2.592,
+        "asr_time_s": 5.0443,
+        "translation": "What's the meaning of that?",
+        "mt_time_s": 2.5218
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 2.944,
+        "transcription": "なんになりますの綺麗な",
+        "detected_language": "ja",
+        "asr_duration_s": 2.944,
+        "asr_time_s": 1.8536,
+        "translation": "How can I make it beautiful?",
+        "mt_time_s": 0.2666
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 2.272,
+        "transcription": "丁寧な言い方と",
+        "detected_language": "ja",
+        "asr_duration_s": 2.272,
+        "asr_time_s": 1.3067,
+        "translation": "丁寧な言い方と",
+        "mt_time_s": 0.2625
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 1.344,
+        "transcription": "なになにいた",
+        "detected_language": "ja",
+        "asr_duration_s": 1.344,
+        "asr_time_s": 1.2381,
+        "translation": "What was the meaning of that?",
+        "mt_time_s": 0.251
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 1.92,
+        "transcription": "なになになった",
+        "detected_language": "ja",
+        "asr_duration_s": 1.92,
+        "asr_time_s": 1.3163,
+        "translation": "What happened to that?",
+        "mt_time_s": 0.217
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 1.44,
+        "transcription": "だフォームですね",
+        "detected_language": "ja",
+        "asr_duration_s": 1.44,
+        "asr_time_s": 1.1224,
+        "translation": "Is it a form?",
+        "mt_time_s": 0.7862
+      },
+      {
+        "chunk_index": 6,
+        "chunk_duration_s": 6.656,
+        "transcription": "ですます使わない言い方がこれは違うんだよ この2種類は違うよ",
+        "detected_language": "ja",
+        "asr_duration_s": 6.656,
+        "asr_time_s": 1.5328,
+        "translation": "This is a different way of saying it. This two types are different, right?",
+        "mt_time_s": 1.1362
+      },
+      {
+        "chunk_index": 7,
+        "chunk_duration_s": 1.312,
+        "transcription": "っていう",
+        "detected_language": "ja",
+        "asr_duration_s": 1.312,
+        "asr_time_s": 1.082,
+        "translation": "What's that?",
+        "mt_time_s": 0.8596
+      },
+      {
+        "chunk_index": 8,
+        "chunk_duration_s": 4.352,
+        "transcription": "の学校で勉強するそうです 授業で",
+        "detected_language": "ja",
+        "asr_duration_s": 4.352,
+        "asr_time_s": 1.2841,
+        "translation": "You're studying at a school, right? Class?",
+        "mt_time_s": 1.0092
+      },
+      {
+        "chunk_index": 9,
+        "chunk_duration_s": 3.808,
+        "transcription": "でああそうか違うんだ",
+        "detected_language": "ja",
+        "asr_duration_s": 3.808,
+        "asr_time_s": 1.2496,
+        "translation": "Ah, you're right. I apologize for the mistake.",
+        "mt_time_s": 1.1164
+      },
+      {
+        "chunk_index": 10,
+        "chunk_duration_s": 6.272,
+        "transcription": "その後がですね面白くて5年生からは",
+        "detected_language": "ja",
+        "asr_duration_s": 6.272,
+        "asr_time_s": 1.3508,
+        "translation": "That's right. After that, it was interesting and I didn't understand it from the 5th grade onward.",
+        "mt_time_s": 1.8749
+      },
+      {
+        "chunk_index": 11,
+        "chunk_duration_s": 1.088,
+        "transcription": "もう",
+        "detected_language": "ja",
+        "asr_duration_s": 1.088,
+        "asr_time_s": 1.3162,
+        "translation": "Oh, I see.",
+        "mt_time_s": 1.5341
+      },
+      {
+        "chunk_index": 12,
+        "chunk_duration_s": 4.64,
+        "transcription": "あれです。 敬語の勉強が始まるそうです。",
+        "detected_language": "ja",
+        "asr_duration_s": 4.64,
+        "asr_time_s": 1.6169,
+        "translation": "Ah, I see. The study of honorifics is starting now.",
+        "mt_time_s": 1.2296
+      },
+      {
+        "chunk_index": 13,
+        "chunk_duration_s": 20.0,
+        "transcription": "尊敬語、謙情語って言います。例えば、いらっしゃるとか、 飯上がる、おっしゃるとか、これは、尊敬語っていう、尊敬語の特別な形ですね。私、謙情語だと、なになにと申します。私は、田中と申します。",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 2.0932,
+        "translation": "Ah, I see. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The",
+        "mt_time_s": 7.743
+      },
+      {
+        "chunk_index": 14,
+        "chunk_duration_s": 8.0,
+        "transcription": "とかね 拝見しますとか見ますの意味ですねこういう皆さんが大嫌いな",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 1.4244,
+        "translation": "Ah, I see. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The",
+        "mt_time_s": 9.2206
+      },
+      {
+        "chunk_index": 15,
+        "chunk_duration_s": 14.176,
+        "transcription": "もしかしたら大好きな言い方ですねあれは日本の子供は11歳くらい11歳から大体学校で勉強をする",
+        "detected_language": "ja",
+        "asr_duration_s": 14.176,
+        "asr_time_s": 1.6194,
+        "translation": "Ah, I see. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The",
+        "mt_time_s": 9.966
+      },
+      {
+        "chunk_index": 16,
+        "chunk_duration_s": 1.984,
+        "transcription": "らしいです",
+        "detected_language": "ja",
+        "asr_duration_s": 1.984,
+        "asr_time_s": 1.1391,
+        "translation": "Ah, I see. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The",
+        "mt_time_s": 11.9965
+      },
+      {
+        "chunk_index": 17,
+        "chunk_duration_s": 9.184,
+        "transcription": "すごいですよね。だから11歳でもうそれを勉強するんだけどでもそれを実際使うところって",
+        "detected_language": "ja",
+        "asr_duration_s": 9.184,
+        "asr_time_s": 1.5941,
+        "translation": "Ah, I see. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The",
+        "mt_time_s": 12.5513
+      },
+      {
+        "chunk_index": 18,
+        "chunk_duration_s": 1.952,
+        "transcription": "あんまりないんですよ",
+        "detected_language": "ja",
+        "asr_duration_s": 1.952,
+        "asr_time_s": 1.2292,
+        "translation": "Ah, I see. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The study of honorifics is starting now. The",
+        "mt_time_s": 15.2946
+      }
+    ]
+  },
+  {
+    "file_name": "podcast_1.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/podcast_1.mp3",
+    "timestamp": "2026-05-18T21:08:36.231414+00:00",
+    "mode": "asr+llm",
+    "with_transcription": true,
+    "total_audio_duration_s": 103.0209,
+    "num_chunks": 19,
+    "models": {
+      "asr_model": "Systran/faster-whisper-small",
+      "asr_device": "cpu",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": "LiquidAI/LFM2.5-1.2B-JP-GGUF",
+      "mt_model_file": "*Q4_K_M.gguf"
+    },
+    "load_times": {
+      "asr_load_s": 2.8556,
+      "mt_load_s": 23.8368
+    },
+    "vad_config": {
+      "silence_ms": 500,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 20000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 2.592,
+        "transcription": "で、なになにです",
+        "detected_language": "ja",
+        "asr_duration_s": 2.592,
+        "asr_time_s": 6.265,
+        "translation": "For what?",
+        "mt_time_s": 0.5336
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 2.944,
+        "transcription": "なんになりますの綺麗な",
+        "detected_language": "ja",
+        "asr_duration_s": 2.944,
+        "asr_time_s": 1.9981,
+        "translation": "A beautiful, elegant thing",
+        "mt_time_s": 1.6352
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 2.272,
+        "transcription": "丁寧な言い方と",
+        "detected_language": "ja",
+        "asr_duration_s": 2.272,
+        "asr_time_s": 1.229,
+        "translation": "丁寧な言い方と",
+        "mt_time_s": 0.2617
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 1.344,
+        "transcription": "なになにいた",
+        "detected_language": "ja",
+        "asr_duration_s": 1.344,
+        "asr_time_s": 1.1107,
+        "translation": "What is the reason",
+        "mt_time_s": 0.7035
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 1.92,
+        "transcription": "なになになった",
+        "detected_language": "ja",
+        "asr_duration_s": 1.92,
+        "asr_time_s": 1.213,
+        "translation": "What happened to you?",
+        "mt_time_s": 0.6744
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 1.44,
+        "transcription": "だフォームですね",
+        "detected_language": "ja",
+        "asr_duration_s": 1.44,
+        "asr_time_s": 1.1267,
+        "translation": "What was the form?",
+        "mt_time_s": 0.6136
+      },
+      {
+        "chunk_index": 6,
+        "chunk_duration_s": 6.656,
+        "transcription": "ですます使わない言い方がこれは違うんだよ この2種類は違うよ",
+        "detected_language": "ja",
+        "asr_duration_s": 6.656,
+        "asr_time_s": 1.6751,
+        "translation": "I understand. This is different from the other two.",
+        "mt_time_s": 0.8532
+      },
+      {
+        "chunk_index": 7,
+        "chunk_duration_s": 1.312,
+        "transcription": "っていう",
+        "detected_language": "ja",
+        "asr_duration_s": 1.312,
+        "asr_time_s": 1.0802,
+        "translation": "I see. What does that mean?",
+        "mt_time_s": 0.7732
+      },
+      {
+        "chunk_index": 8,
+        "chunk_duration_s": 4.352,
+        "transcription": "の学校で勉強するそうです 授業で",
+        "detected_language": "ja",
+        "asr_duration_s": 4.352,
+        "asr_time_s": 1.2546,
+        "translation": "You're studying at a school called [School Name]. The classes are interesting.",
+        "mt_time_s": 1.0522
+      },
+      {
+        "chunk_index": 9,
+        "chunk_duration_s": 3.808,
+        "transcription": "でああそうか違うんだ",
+        "detected_language": "ja",
+        "asr_duration_s": 3.808,
+        "asr_time_s": 1.2608,
+        "translation": "Ah, I see. The classes are not what you expected.",
+        "mt_time_s": 0.9371
+      },
+      {
+        "chunk_index": 10,
+        "chunk_duration_s": 6.272,
+        "transcription": "その後がですね面白くて5年生からは",
+        "detected_language": "ja",
+        "asr_duration_s": 6.272,
+        "asr_time_s": 1.6218,
+        "translation": "The next part of the class is interesting, and it's from the fifth grade.",
+        "mt_time_s": 1.124
+      },
+      {
+        "chunk_index": 11,
+        "chunk_duration_s": 1.088,
+        "transcription": "もう",
+        "detected_language": "ja",
+        "asr_duration_s": 1.088,
+        "asr_time_s": 1.7029,
+        "translation": "I'm sorry, I didn't understand that. What did you mean by \"もう\"?",
+        "mt_time_s": 1.113
+      },
+      {
+        "chunk_index": 12,
+        "chunk_duration_s": 4.64,
+        "transcription": "あれです。 敬語の勉強が始まるそうです。",
+        "detected_language": "ja",
+        "asr_duration_s": 4.64,
+        "asr_time_s": 1.5042,
+        "translation": "Ah, I see. The teacher will be starting a lesson on the use of polite language.",
+        "mt_time_s": 1.2199
+      },
+      {
+        "chunk_index": 13,
+        "chunk_duration_s": 20.0,
+        "transcription": "尊敬語、謙情語って言います。例えば、いらっしゃるとか、 飯上がる、おっしゃるとか、これは、尊敬語っていう、尊敬語の特別な形ですね。私、謙情語だと、なになにと申します。私は、田中と申します。",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 2.0627,
+        "translation": "I understand. The teacher will be teaching about the use of polite language, including honorifics and humble words. For example, \"arashii\" (来る) and \"ishi gaaru\" (食べる) are examples of honorifics, while \"natto\" (なと) and \"ishita\" (いた) are examples of humble words. I am humbly speaking as Tanaka.",
+        "mt_time_s": 3.3454
+      },
+      {
+        "chunk_index": 14,
+        "chunk_duration_s": 8.0,
+        "transcription": "とかね 拝見しますとか見ますの意味ですねこういう皆さんが大嫌いな",
+        "detected_language": "ja",
+        "asr_duration_s": 8.0,
+        "asr_time_s": 1.3605,
+        "translation": "Ah, I see. The teacher will be explaining that \"kanoe\" (拝見します) and \"mikire\" (見ます) are examples of humble words, while \"arashii\" (来る) and \"ishi gaaru\" (食べる) are examples of honorifics. The teacher will also explain that \"natto\" (なと) and \"ishita\" (いた) are examples of humble words, while \"tatakai\" (たかいが) and \"shitei\" (しえて) are examples of honorifics. The teacher will also explain that \"arashii\" (来る) and \"ishi gaaru\" (食べる) are examples of honorifics, while \"natto\" (なと) and \"ishita\" (いた) are examples of humble words.",
+        "mt_time_s": 5.745
+      },
+      {
+        "chunk_index": 15,
+        "chunk_duration_s": 14.176,
+        "transcription": "もしかしたら大好きな言い方ですねあれは日本の子供は11歳くらい11歳から大体学校で勉強をする",
+        "detected_language": "ja",
+        "asr_duration_s": 14.176,
+        "asr_time_s": 1.5757,
+        "translation": "Ah, I see. The teacher will be explaining that the use of honorifics and humble words is common in Japanese children's speech, particularly in their school years. For example, \"tatakai\" (たかいが) and \"shitei\" (しえて) are examples of honorifics, while \"natto\" (なと) and \"ishita\" (いた) are examples of humble words. The teacher will also explain that \"arashii\" (来る) and \"ishi gaaru\" (食べる) are examples of honorifics, while \"natto\" (なと) and \"ishita\" (いた) are examples of humble words.",
+        "mt_time_s": 5.7413
+      },
+      {
+        "chunk_index": 16,
+        "chunk_duration_s": 1.984,
+        "transcription": "らしいです",
+        "detected_language": "ja",
+        "asr_duration_s": 1.984,
+        "asr_time_s": 1.4691,
+        "translation": "Ah, I see. The teacher will be explaining that the use of honorifics and humble words is common in Japanese children's speech, particularly in their school years. For example, \"tatakai\" (たかいが) and \"shitei\" (しえて) are examples of honorifics, while \"natto\" (なと) and \"ishita\" (いた) are examples of humble words. The teacher will also explain that \"arashii\" (来る) and \"ishi gaaru\" (食べる) are examples of honorifics, while \"natto\" (なと) and \"ishita\" (いた) are examples of humble words.",
+        "mt_time_s": 6.7307
+      },
+      {
+        "chunk_index": 17,
+        "chunk_duration_s": 9.184,
+        "transcription": "すごいですよね。だから11歳でもうそれを勉強するんだけどでもそれを実際使うところって",
+        "detected_language": "ja",
+        "asr_duration_s": 9.184,
+        "asr_time_s": 2.5838,
+        "translation": "Ah, I see. The teacher will be explaining that the use of honorifics and humble words is common in Japanese children's speech, particularly in their school years. For example, \"tatakai\" (たかいが) and \"shitei\" (しえて) are examples of honorifics, while \"natto\" (なと) and \"ishita\" (いた) are examples of humble words. The teacher will also explain that \"arashii\" (来る) and \"ishi gaaru\" (食べる) are examples of honorifics, while \"natto\" (なと) and \"ishita\" (いた) are examples of humble words. The teacher will also explain that the use of honorifics and humble words is common in Japanese children's speech, particularly in their school years. For example, 11-year-old children will be taught to use honorifics and humble words in their school years.",
+        "mt_time_s": 8.3869
+      },
+      {
+        "chunk_index": 18,
+        "chunk_duration_s": 1.952,
+        "transcription": "あんまりないんですよ",
+        "detected_language": "ja",
+        "asr_duration_s": 1.952,
+        "asr_time_s": 1.4133,
+        "translation": "Ah, I see. The teacher will be explaining that the use of honorifics and humble words is common in Japanese children's speech, particularly in their school years. For example, 11-year-old children will be taught to use honorifics and humble words in their school years. The teacher will also explain that the use of honorifics and humble words is common in Japanese children's speech, particularly in their school years. For example, 11-year-old children will be taught to use honorifics and humble words in their school years.",
+        "mt_time_s": 5.3933
+      }
+    ]
+  },
+  {
+    "file_name": "podcast_1.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/podcast_1.mp3",
+    "timestamp": "2026-05-18T21:09:36.683918+00:00",
+    "mode": "bilingual",
+    "with_transcription": false,
+    "total_audio_duration_s": 103.0209,
+    "num_chunks": 6,
+    "models": {
+      "asr_model": "Systran/faster-whisper-small",
+      "asr_device": "cpu",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": null,
+      "mt_model_file": null
+    },
+    "load_times": {
+      "asr_load_s": 2.9472,
+      "mt_load_s": 0.0
+    },
+    "vad_config": {
+      "silence_ms": 1000,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 20000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "And then, what is it? What is it? The beautiful, delicate way of saying it and what is it? What is it? It's a form. Well, the way of saying it is not used is different. These two types are different.",
+        "mt_time_s": 1.6423
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 9.152,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 9.152,
+        "asr_time_s": 0.0,
+        "translation": "I think I'm going to study at school. In class. Oh, that's wrong.",
+        "mt_time_s": 1.2861
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "It's interesting that from the 5th grade, the study of the language is beginning. There are the words Son-keigo, Ken-jo-go, for example, irassharu, meshiagaru, ossharu, etc.",
+        "mt_time_s": 2.8106
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "so this is a special form of respect when I'm in Keinjo, I would say Narinari or Tannaka or Miimasu might say I like this person",
+        "mt_time_s": 21.2598
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "I think that's the kind of person who loves Japanese. She's about 11 years old. She's been studying at school since she was 11 years old. She's amazing. She's only studying at 11 years old.",
+        "mt_time_s": 2.8054
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 7.296,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 7.296,
+        "asr_time_s": 0.0,
+        "translation": "But I don't really use it.",
+        "mt_time_s": 1.27
+      }
+    ]
+  },
+  {
+    "file_name": "podcast_1.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/podcast_1.mp3",
+    "timestamp": "2026-05-18T21:11:31.721672+00:00",
+    "mode": "bilingual",
+    "with_transcription": false,
+    "total_audio_duration_s": 103.0209,
+    "num_chunks": 9,
+    "models": {
+      "asr_model": "Systran/faster-whisper-small",
+      "asr_device": "cpu",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": null,
+      "mt_model_file": null
+    },
+    "load_times": {
+      "asr_load_s": 2.9064,
+      "mt_load_s": 0.0
+    },
+    "vad_config": {
+      "silence_ms": 850,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 20000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 9.504,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 9.504,
+        "asr_time_s": 0.0,
+        "translation": "And then, what's next? What's next? The beautiful, delicate way of saying it and what's next?",
+        "mt_time_s": 1.4289
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 19.488,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 19.488,
+        "asr_time_s": 0.0,
+        "translation": "It's a form that was a little bit different. Well, the way you don't use it is different. These two types are different. It's like studying at school. In class. Oh, that's wrong.",
+        "mt_time_s": 1.5524
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 7.36,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 7.36,
+        "asr_time_s": 0.0,
+        "translation": "After that, it's interesting. From the 5th grade,",
+        "mt_time_s": 1.2243
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 4.64,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 4.64,
+        "asr_time_s": 0.0,
+        "translation": "That's it. The study of the form is about to begin.",
+        "mt_time_s": 1.2039
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "Sonkeigo, Kenjougo, for example, irassharu or meshiyagaru, osyaru, or this is a special form of Sonkeigo. I'm Kenjougo, I'm Nani Nani, I'm Tanaka, I'm Nani.",
+        "mt_time_s": 1.7213
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "or to experience it. It means to see it. People who hate it, maybe they like it. That's the kind of person who says, that Japanese kids are about 11 years old, around 11 years old.",
+        "mt_time_s": 14.3771
+      },
+      {
+        "chunk_index": 6,
+        "chunk_duration_s": 4.16,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 4.16,
+        "asr_time_s": 0.0,
+        "translation": "I'm going to study there.",
+        "mt_time_s": 4.1018
+      },
+      {
+        "chunk_index": 7,
+        "chunk_duration_s": 9.184,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 9.184,
+        "asr_time_s": 0.0,
+        "translation": "It's amazing, right? I'm studying it at 11 years old, but I'm actually using it.",
+        "mt_time_s": 1.3825
+      },
+      {
+        "chunk_index": 8,
+        "chunk_duration_s": 1.952,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.952,
+        "asr_time_s": 0.0,
+        "translation": "I don't have much.",
+        "mt_time_s": 1.1328
+      }
+    ]
+  },
+  {
+    "file_name": "podcast_1.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/podcast_1.mp3",
+    "timestamp": "2026-05-18T21:15:05.724279+00:00",
+    "mode": "bilingual",
+    "with_transcription": false,
+    "total_audio_duration_s": 103.0209,
+    "num_chunks": 9,
+    "models": {
+      "asr_model": "Systran/faster-whisper-small",
+      "asr_device": "cpu",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": null,
+      "mt_model_file": null
+    },
+    "load_times": {
+      "asr_load_s": 2.01,
+      "mt_load_s": 0.0
+    },
+    "vad_config": {
+      "silence_ms": 850,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 20000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 9.504,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 9.504,
+        "asr_time_s": 0.0,
+        "translation": "And then, what's next? What's next? The beautiful, delicate way of saying it and what's next?",
+        "mt_time_s": 1.3814
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 19.488,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 19.488,
+        "asr_time_s": 0.0,
+        "translation": "It's a form that was a little bit different. Well, the way you don't use it is different. These two types are different. It's like studying at school. In class. Oh, that's wrong.",
+        "mt_time_s": 1.5868
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 7.36,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 7.36,
+        "asr_time_s": 0.0,
+        "translation": "After that, it's interesting. From the 5th grade,",
+        "mt_time_s": 1.187
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 4.64,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 4.64,
+        "asr_time_s": 0.0,
+        "translation": "That's it. The study of the form is about to begin.",
+        "mt_time_s": 1.2069
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "Sonkeigo, Kenjougo, for example, irassharu or meshiyagaru, osyaru, or this is a special form of Sonkeigo. I'm Kenjougo, I'm Nani Nani, I'm Tanaka, I'm Nani.",
+        "mt_time_s": 1.6569
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "It means to experience. It means to see. Everyone like this is very hateful. Maybe he loves it. That's a good word. That's about 11 years old Japanese children. 11 years old from the school.",
+        "mt_time_s": 15.91
+      },
+      {
+        "chunk_index": 6,
+        "chunk_duration_s": 4.16,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 4.16,
+        "asr_time_s": 0.0,
+        "translation": "I'm going to study there.",
+        "mt_time_s": 3.6667
+      },
+      {
+        "chunk_index": 7,
+        "chunk_duration_s": 9.184,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 9.184,
+        "asr_time_s": 0.0,
+        "translation": "It's amazing, right? I'm studying it at 11 years old, but I'm actually using it.",
+        "mt_time_s": 1.5722
+      },
+      {
+        "chunk_index": 8,
+        "chunk_duration_s": 1.952,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.952,
+        "asr_time_s": 0.0,
+        "translation": "I don't have much.",
+        "mt_time_s": 1.177
+      }
+    ]
+  },
+  {
+    "file_name": "podcast_1.mp3",
+    "file_path": "/home/animesh/develop/project/translate/data/audio/podcast_1.mp3",
+    "timestamp": "2026-05-18T21:15:50.200850+00:00",
+    "mode": "bilingual",
+    "with_transcription": false,
+    "total_audio_duration_s": 103.0209,
+    "num_chunks": 9,
+    "models": {
+      "asr_model": "Systran/faster-whisper-small",
+      "asr_device": "cpu",
+      "asr_compute_type": "int8",
+      "asr_language": "ja",
+      "mt_model_repo": null,
+      "mt_model_file": null
+    },
+    "load_times": {
+      "asr_load_s": 1.3529,
+      "mt_load_s": 0.0
+    },
+    "vad_config": {
+      "silence_ms": 850,
+      "min_chunk_ms": 1000,
+      "max_chunk_ms": 20000,
+      "speech_threshold": 0.5
+    },
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "chunk_duration_s": 9.504,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 9.504,
+        "asr_time_s": 0.0,
+        "translation": "And then, what's next? What's next? The beautiful, delicate way of saying it and what's next?",
+        "mt_time_s": 1.4948
+      },
+      {
+        "chunk_index": 1,
+        "chunk_duration_s": 19.488,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 19.488,
+        "asr_time_s": 0.0,
+        "translation": "It's a form that was a little bit different. Well, the way you don't use it is different. These two types are different. It's like studying at school. In class. Oh, that's wrong.",
+        "mt_time_s": 1.5751
+      },
+      {
+        "chunk_index": 2,
+        "chunk_duration_s": 7.36,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 7.36,
+        "asr_time_s": 0.0,
+        "translation": "That's interesting. From the 5th grade...",
+        "mt_time_s": 1.2297
+      },
+      {
+        "chunk_index": 3,
+        "chunk_duration_s": 4.64,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 4.64,
+        "asr_time_s": 0.0,
+        "translation": "That's it. The study of the form is about to begin.",
+        "mt_time_s": 1.2204
+      },
+      {
+        "chunk_index": 4,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "Sonkeigo, Kenjougo, for example, irassharu, mechiyagaru, osyaru, this is a special form of Sonkeigo. I'm Kenjougo, I'm Nani Nani, I'm Tanaka, I'm Nani.",
+        "mt_time_s": 1.7075
+      },
+      {
+        "chunk_index": 5,
+        "chunk_duration_s": 20.0,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 20.0,
+        "asr_time_s": 0.0,
+        "translation": "It means to experience. It means to see. These people who hate it, or maybe they love it, are good people. That is when children in Japan are about 11 years old.",
+        "mt_time_s": 12.358
+      },
+      {
+        "chunk_index": 6,
+        "chunk_duration_s": 4.16,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 4.16,
+        "asr_time_s": 0.0,
+        "translation": "I'm going to study in this way.",
+        "mt_time_s": 3.1532
+      },
+      {
+        "chunk_index": 7,
+        "chunk_duration_s": 9.184,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 9.184,
+        "asr_time_s": 0.0,
+        "translation": "It's amazing, right? I'm studying it at age 11, but I'm actually using it.",
+        "mt_time_s": 1.2763
+      },
+      {
+        "chunk_index": 8,
+        "chunk_duration_s": 1.952,
+        "transcription": "",
+        "detected_language": "ja",
+        "asr_duration_s": 1.952,
+        "asr_time_s": 0.0,
+        "translation": "I don't have much.",
+        "mt_time_s": 1.2648
+      }
+    ]
+  }
+]
