@@ -34,17 +34,28 @@ class ASRConfig:
 
 @dataclass(frozen=True)
 class MTConfig:
-    model_repo: str = "LiquidAI/LFM2.5-1.2B-JP-GGUF"
-    # Glob — llama-cpp-python's from_pretrained accepts a filename pattern.
-    model_file: str = "*Q4_K_M.gguf"
-    n_ctx: int = 4096
-    n_threads: int = 0  # 0 → auto
-    repeat_penalty: float = 1.05  # per LFM2.5-JP model card
-    temperature: float = 0.2
+    # Translation-specialist seq2seq. Distilled 1.3B is the smallest variant
+    # that holds quality on JA→EN; 600M is faster but noticeably worse.
+    model_repo: str = "facebook/nllb-200-distilled-1.3B"
+    src_lang: str = "jpn_Jpan"  # NLLB BCP-47 + script tag
+    tgt_lang: str = "eng_Latn"
+    device: str = "cpu"  # cpu | cuda | auto
+    num_beams: int = 4
     max_tokens: int = 256
-    context_pairs: int = 2  # rolling (ja, en) pairs fed back as MT context; keep low for small models
-    fallback_repo: str = "Qwen/Qwen2.5-1.5B-Instruct-GGUF"
-    fallback_file: str = "*q4_k_m.gguf"
+
+
+@dataclass(frozen=True)
+class OpenVINOASRConfig:
+    # Prequantized OpenVINO IR weights from the OpenVINO org. Use the int8 small
+    # variant by default; bump to int4 large-v3 if you want quality at the cost
+    # of NPU memory.
+    model: str = "OpenVINO/whisper-small-int8-ov"
+    bilingual_model: str = "OpenVINO/whisper-small-int8-ov"
+    # OpenVINO device strings: CPU | GPU | NPU | AUTO | HETERO:NPU,CPU
+    # AUTO picks the best available; force NPU on Core Ultra laptops.
+    device: str = "AUTO"
+    language: str = "ja"
+    max_new_tokens: int = 256
 
 
 @dataclass(frozen=True)
@@ -52,4 +63,5 @@ class Config:
     audio: AudioConfig = field(default_factory=AudioConfig)
     vad: VADConfig = field(default_factory=VADConfig)
     asr: ASRConfig = field(default_factory=ASRConfig)
+    openvino_asr: OpenVINOASRConfig = field(default_factory=OpenVINOASRConfig)
     mt: MTConfig = field(default_factory=MTConfig)

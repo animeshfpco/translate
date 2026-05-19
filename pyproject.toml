@@ -13,10 +13,21 @@ dependencies = [
     "PySide6>=6.7",
     "huggingface-hub>=0.24",
     "resampy>=0.4.3",
+    "torch>=2.2",
+    "torchaudio>=2.2",
+    "transformers>=4.45",
+    "sentencepiece>=0.2",
+    "accelerate>=0.30",
 ]
 
 [project.scripts]
 translate = "translate.cli:main"
+
+[project.optional-dependencies]
+openvino = [
+    "openvino>=2024.4",
+    "optimum[openvino]>=1.20",
+]
 
 [dependency-groups]
 dev = [

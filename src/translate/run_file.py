@@ -5,6 +5,8 @@ data/results/<audio_stem>.json.
 Usage:
     python -m translate.run_file path/to/audio.wav
     python -m translate.run_file path/to/audio.wav --device cuda --asr-model Systran/faster-whisper-medium
+    python -m translate.run_file path/to/audio.wav --bilingual
+    python -m translate.run_file path/to/audio.wav --asr-backend openvino --ov-device NPU
 """
 
 import argparse
@@ -17,9 +19,10 @@ from pathlib import Path
 import numpy as np
 import soundfile as sf
 
+from translate.asr.base import ASRWorker
 from translate.asr.whisper import WhisperASR
-from translate.config import ASRConfig, Config, MTConfig, VADConfig
-from translate.mt.llama import LlamaMT
+from translate.config import ASRConfig, Config, MTConfig, OpenVINOASRConfig
+from translate.mt.nllb import NllbMT
 from translate.vad import VADChunker
 
 log = logging.getLogger("translate.run_file")
@@ -54,22 +57,30 @@ def chunk_audio_by_frames(audio: np.ndarray, frame_samples: int) -> list[np.ndar
     return frames
 
 
+def build_asr(cfg: Config, backend: str) -> ASRWorker:
+    if backend == "openvino":
+        from translate.asr.openvino import OpenVINOWhisperASR
+        return OpenVINOWhisperASR(cfg.openvino_asr)
+    return WhisperASR(cfg.asr)
+
+
 def run(
     audio_path: Path,
     cfg: Config,
     bilingual: bool = False,
+    asr_backend: str = "ctranslate2",
     with_transcription: bool = True,
 ) -> dict:
     """Run pipeline on `audio_path`.
 
     Modes:
-      - Default (bilingual=False): ASR (JA) → LlamaMT (EN). Two models.
+      - Default (bilingual=False): ASR (JA) → NllbMT (EN). Two models.
       - Bilingual (bilingual=True): ASR-only model emits EN directly (Whisper
         task="translate"). If with_transcription=True, do a second ASR pass for
-        the JA source. No LlamaMT.
+        the JA source. No MT.
     """
-    asr = WhisperASR(cfg.asr)
-    mt = None if bilingual else LlamaMT(cfg.mt)
+    asr = build_asr(cfg, asr_backend)
+    mt = None if bilingual else NllbMT(cfg.mt)
     vad = VADChunker(cfg.vad, cfg.audio.sample_rate)
 
     log.info("Loading audio: %s", audio_path)
@@ -77,7 +88,12 @@ def run(
     total_duration_s = len(audio) / cfg.audio.sample_rate
     log.info("Loaded %.2fs of audio", total_duration_s)
 
-    log.info("Warming up ASR model (%s)…", cfg.asr.model)
+    asr_label = (
+        f"openvino:{cfg.openvino_asr.model} on {cfg.openvino_asr.device}"
+        if asr_backend == "openvino"
+        else f"ctranslate2:{cfg.asr.model} on {cfg.asr.device}"
+    )
+    log.info("Warming up ASR (%s)…", asr_label)
     t0 = time.monotonic()
     asr.prewarm()
     asr_load_s = time.monotonic() - t0
@@ -100,12 +116,13 @@ def run(
         log.info("Chunk %d/%d (%.2fs)…", i + 1, len(chunks), chunk_duration_s)
 
         transcription_text = ""
+        translation_text = ""
         asr_time_s = 0.0
-        detected_language = cfg.asr.language
+        mt_time_s = 0.0
         asr_duration_s = chunk_duration_s
+        detected_language = cfg.asr.language
 
         if bilingual:
-            # Primary call → translation (EN). Optional second call → JA source.
             t0 = time.monotonic()
             translation = asr.translate(chunk)
             mt_time_s = time.monotonic() - t0
@@ -129,14 +146,12 @@ def run(
             asr_duration_s = transcript.duration_s
             log.info("  transcribed in %.2fs: %r", asr_time_s, transcription_text)
 
-            translation_text = ""
-            mt_time_s = 0.0
             if transcription_text:
                 t0 = time.monotonic()
                 tr = mt.translate(transcription_text)
                 mt_time_s = time.monotonic() - t0
                 translation_text = tr.target
-                log.info("  translated (LLM) in %.2fs: %r", mt_time_s, translation_text)
+                log.info("  translated (NLLB) in %.2fs: %r", mt_time_s, translation_text)
 
         results_chunks.append(
             {
@@ -155,17 +170,17 @@ def run(
         "file_name": audio_path.name,
         "file_path": str(audio_path.resolve()),
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "mode": "bilingual" if bilingual else "asr+llm",
+        "mode": "bilingual" if bilingual else "default",
+        "asr_backend": asr_backend,
         "with_transcription": with_transcription if bilingual else True,
         "total_audio_duration_s": round(total_duration_s, 4),
         "num_chunks": len(chunks),
         "models": {
-            "asr_model": cfg.asr.model,
-            "asr_device": cfg.asr.device,
-            "asr_compute_type": cfg.asr.compute_type,
+            "asr_model": cfg.openvino_asr.model if asr_backend == "openvino" else cfg.asr.model,
+            "asr_device": cfg.openvino_asr.device if asr_backend == "openvino" else cfg.asr.device,
+            "asr_compute_type": None if asr_backend == "openvino" else cfg.asr.compute_type,
             "asr_language": cfg.asr.language,
             "mt_model_repo": None if bilingual else cfg.mt.model_repo,
-            "mt_model_file": None if bilingual else cfg.mt.model_file,
         },
         "load_times": {
             "asr_load_s": round(asr_load_s, 4),
@@ -203,14 +218,30 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="Run translate pipeline on a local audio file.")
     parser.add_argument("audio", type=Path, help="Path to audio file (wav/mp3/flac/…)")
+    parser.add_argument(
+        "--asr-backend",
+        choices=["ctranslate2", "openvino"],
+        default="ctranslate2",
+        help="ASR runtime. 'openvino' targets Intel NPU/iGPU/CPU.",
+    )
     parser.add_argument("--asr-model", default=None, help="Override ASR model (HF repo or path)")
     parser.add_argument("--mt-model", default=None, help="Override MT model repo")
-    parser.add_argument("--device", default=None, choices=["cpu", "cuda", "auto"], help="ASR device")
+    parser.add_argument(
+        "--device",
+        default=None,
+        choices=["cpu", "cuda", "auto"],
+        help="Device for ctranslate2 ASR and torch MT.",
+    )
+    parser.add_argument(
+        "--ov-device",
+        default=None,
+        help="OpenVINO device: CPU | GPU | NPU | AUTO | HETERO:NPU,CPU.",
+    )
     parser.add_argument("--out-dir", type=Path, default=RESULTS_DIR, help="Directory for JSON results")
     parser.add_argument(
         "--bilingual",
         action="store_true",
-        help="Use ASR model directly for translation (Whisper task=translate); skips LLM MT.",
+        help="Use ASR model directly for translation (Whisper task=translate); skips MT.",
     )
     parser.add_argument(
         "--no-transcription",
@@ -224,33 +255,45 @@ def main() -> None:
         raise SystemExit(f"Audio file not found: {audio_path}")
 
     cfg = Config()
-    # In --bilingual mode, default to the bilingual ASR model unless overridden.
-    if args.bilingual and not args.asr_model:
+    if args.bilingual and not args.asr_model and args.asr_backend == "ctranslate2":
         args.asr_model = cfg.asr.bilingual_model
-    # Only rebuild sub-configs when CLI args explicitly override them.
-    if args.asr_model or args.device:
-        cfg = Config(
-            audio=cfg.audio,
-            vad=cfg.vad,
-            asr=ASRConfig(
-                **{**cfg.asr.__dict__,
-                   **({"model": args.asr_model} if args.asr_model else {}),
-                   **({"device": args.device} if args.device else {})}
-            ),
-            mt=cfg.mt,
-        )
+
+    asr_overrides: dict[str, str] = {}
+    if args.asr_model and args.asr_backend == "ctranslate2":
+        asr_overrides["model"] = args.asr_model
+    if args.device:
+        asr_overrides["device"] = args.device
+
+    mt_overrides: dict[str, str] = {}
     if args.mt_model:
+        mt_overrides["model_repo"] = args.mt_model
+    if args.device:
+        mt_overrides["device"] = args.device
+
+    ov_overrides: dict[str, str] = {}
+    if args.asr_model and args.asr_backend == "openvino":
+        ov_overrides["model"] = args.asr_model
+        if args.bilingual:
+            ov_overrides["bilingual_model"] = args.asr_model
+    if args.ov_device:
+        ov_overrides["device"] = args.ov_device
+    if args.bilingual and args.asr_backend == "openvino" and "model" not in ov_overrides:
+        ov_overrides["model"] = cfg.openvino_asr.bilingual_model
+
+    if asr_overrides or mt_overrides or ov_overrides:
         cfg = Config(
             audio=cfg.audio,
             vad=cfg.vad,
-            asr=cfg.asr,
-            mt=MTConfig(**{**cfg.mt.__dict__, "model_repo": args.mt_model}),
+            asr=ASRConfig(**{**cfg.asr.__dict__, **asr_overrides}),
+            openvino_asr=OpenVINOASRConfig(**{**cfg.openvino_asr.__dict__, **ov_overrides}),
+            mt=MTConfig(**{**cfg.mt.__dict__, **mt_overrides}),
         )
 
     record = run(
         audio_path,
         cfg,
         bilingual=args.bilingual,
+        asr_backend=args.asr_backend,
         with_transcription=not args.no_transcription,
     )
 

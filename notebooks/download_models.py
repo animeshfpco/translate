@@ -33,18 +33,13 @@ asr_model = WhisperModel(
 print("      ✓ ASR ready")
 
 # ── MT ───────────────────────────────────────────────────────────────────────
-print(f"\n[2/2] MT  — {mt_cfg.model_repo}  (file={mt_cfg.model_file})")
+print(f"\n[2/2] MT  — {mt_cfg.model_repo}")
 print("      Downloading and loading into memory...")
 
-from llama_cpp import Llama
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
-mt_model = Llama.from_pretrained(
-    repo_id=mt_cfg.model_repo,
-    filename=mt_cfg.model_file,
-    n_ctx=mt_cfg.n_ctx,
-    n_threads=mt_cfg.n_threads or None,
-    verbose=False,
-)
+mt_tokenizer = AutoTokenizer.from_pretrained(mt_cfg.model_repo, src_lang=mt_cfg.src_lang)
+mt_model = AutoModelForSeq2SeqLM.from_pretrained(mt_cfg.model_repo)
 print("      ✓ MT ready")
 
 print("\nBoth models cached. Next run of `uv run translate` will skip the download.")

@@ -14,3 +14,9 @@ class Transcript:
 class ASRWorker(ABC):
     @abstractmethod
     def transcribe(self, audio: np.ndarray) -> Transcript: ...
+
+    @abstractmethod
+    def translate(self, audio: np.ndarray) -> Transcript: ...
+
+    @abstractmethod
+    def prewarm(self) -> None: ...
