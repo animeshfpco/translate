@@ -3,7 +3,7 @@ name = "translate"
 version = "0.1.0"
 description = "Near-real-time JA→EN transcription + translation from system audio (Teams, YouTube) on Windows/Linux"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "faster-whisper>=1.0",
     "ctranslate2>=4.4",
@@ -26,8 +26,13 @@ translate = "translate.cli:main"
 
 [project.optional-dependencies]
 openvino = [
-    "openvino>=2024.4",
-    "optimum[openvino]>=1.20",
+    # OpenVINO 2025.x removed the `openvino.runtime` submodule; optimum-intel 1.21
+    # still imports from it. Pin to the 2024.x line for compatibility.
+    "openvino>=2024.4,<2025.0",
+    # optimum 1.24+ removed `merge_decoders` from `optimum.onnx` which breaks
+    # the optimum-intel openvino exporter. Pin to the last compatible pair.
+    "optimum>=1.23,<1.24",
+    "optimum-intel[openvino]>=1.21,<1.22",
 ]
 
 [dependency-groups]
