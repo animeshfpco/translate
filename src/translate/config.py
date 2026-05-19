@@ -45,6 +45,19 @@ class MTConfig:
 
 
 @dataclass(frozen=True)
+class CT2MTConfig:
+    # Same HF repo as MTConfig — CT2 converts from the vanilla NLLB checkpoint.
+    # Auto-converted on first prewarm and cached under ~/.cache/translate/ct2-mt/.
+    model_repo: str = "facebook/nllb-200-distilled-600M"
+    src_lang: str = "jpn_Jpan"
+    tgt_lang: str = "eng_Latn"
+    device: str = "cpu"  # cpu | cuda | auto
+    compute_type: str = "int8"  # int8 | int8_float16 | float16 | float32
+    num_beams: int = 1
+    max_tokens: int = 256
+
+
+@dataclass(frozen=True)
 class OpenVINOASRConfig:
     # Prequantized OpenVINO IR weights from the OpenVINO org. Use the int8 small
     # variant by default; bump to int4 large-v3 if you want quality at the cost
@@ -65,3 +78,4 @@ class Config:
     asr: ASRConfig = field(default_factory=ASRConfig)
     openvino_asr: OpenVINOASRConfig = field(default_factory=OpenVINOASRConfig)
     mt: MTConfig = field(default_factory=MTConfig)
+    ct2_mt: CT2MTConfig = field(default_factory=CT2MTConfig)

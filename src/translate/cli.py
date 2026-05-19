@@ -1,7 +1,7 @@
 import argparse
 import logging
 
-from translate.config import ASRConfig, Config, MTConfig, OpenVINOASRConfig
+from translate.config import ASRConfig, CT2MTConfig, Config, MTConfig, OpenVINOASRConfig
 from translate.pipeline import Pipeline
 
 
@@ -18,6 +18,23 @@ def main() -> None:
         default="ctranslate2",
         help="ASR runtime. 'openvino' targets Intel NPU/iGPU/CPU; requires "
              "the 'openvino' extra (uv sync --extra openvino).",
+    )
+    parser.add_argument(
+        "--mt-backend",
+        choices=["torch", "ctranslate2"],
+        default="ctranslate2",
+        help="MT runtime. 'ctranslate2' is int8 + AVX2-optimized — typically 4–8× "
+             "faster than 'torch' on CPU. Auto-converts NLLB to CT2 on first run.",
+    )
+    parser.add_argument(
+        "--mt-model",
+        default=None,
+        help="Override MT model (HF repo). Applied to whichever --mt-backend is active.",
+    )
+    parser.add_argument(
+        "--mt-compute-type",
+        default=None,
+        help="CT2 quantization: int8 | int8_float16 | float16 | float32 (when --mt-backend ctranslate2).",
     )
     parser.add_argument("--asr-model", default=None, help="Override ASR model (HF repo or path)")
     parser.add_argument(
@@ -54,6 +71,16 @@ def main() -> None:
     mt_overrides: dict[str, str] = {}
     if args.device:
         mt_overrides["device"] = args.device
+    if args.mt_model and args.mt_backend == "torch":
+        mt_overrides["model_repo"] = args.mt_model
+
+    ct2_mt_overrides: dict[str, str] = {}
+    if args.device:
+        ct2_mt_overrides["device"] = args.device
+    if args.mt_model and args.mt_backend == "ctranslate2":
+        ct2_mt_overrides["model_repo"] = args.mt_model
+    if args.mt_compute_type:
+        ct2_mt_overrides["compute_type"] = args.mt_compute_type
 
     ov_overrides: dict[str, str] = {}
     if args.asr_model and args.asr_backend == "openvino":
@@ -66,17 +93,18 @@ def main() -> None:
     if args.bilingual and args.asr_backend == "openvino" and "model" not in ov_overrides:
         ov_overrides["model"] = cfg.openvino_asr.bilingual_model
 
-    if asr_overrides or mt_overrides or ov_overrides:
+    if asr_overrides or mt_overrides or ct2_mt_overrides or ov_overrides:
         cfg = Config(
             audio=cfg.audio,
             vad=cfg.vad,
             asr=ASRConfig(**{**cfg.asr.__dict__, **asr_overrides}),
             openvino_asr=OpenVINOASRConfig(**{**cfg.openvino_asr.__dict__, **ov_overrides}),
             mt=MTConfig(**{**cfg.mt.__dict__, **mt_overrides}),
+            ct2_mt=CT2MTConfig(**{**cfg.ct2_mt.__dict__, **ct2_mt_overrides}),
         )
 
     mode = "bilingual" if args.bilingual else "default"
-    Pipeline(cfg, mode=mode, asr_backend=args.asr_backend).run()
+    Pipeline(cfg, mode=mode, asr_backend=args.asr_backend, mt_backend=args.mt_backend).run()
 
 
 if __name__ == "__main__":

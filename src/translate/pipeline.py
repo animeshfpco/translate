@@ -10,6 +10,7 @@ from translate.asr.base import ASRWorker, Transcript
 from translate.asr.whisper import WhisperASR
 from translate.audio import get_capture
 from translate.config import Config
+from translate.mt.base import MTWorker
 from translate.mt.nllb import NllbMT
 from translate.ui.overlay import OverlayWindow
 from translate.vad import VADChunker
@@ -20,6 +21,7 @@ _STOP = object()
 
 Mode = Literal["default", "bilingual"]
 AsrBackend = Literal["ctranslate2", "openvino"]
+MtBackend = Literal["torch", "ctranslate2"]
 
 
 class Pipeline:
@@ -34,10 +36,12 @@ class Pipeline:
         cfg: Config,
         mode: Mode = "default",
         asr_backend: AsrBackend = "ctranslate2",
+        mt_backend: MtBackend = "torch",
     ) -> None:
         self.cfg = cfg
         self.mode = mode
         self.asr_backend = asr_backend
+        self.mt_backend = mt_backend
         self._asr_q: Queue = Queue(maxsize=8)
         self._mt_q: Queue = Queue(maxsize=8)
         self._stop = threading.Event()
@@ -46,7 +50,7 @@ class Pipeline:
         self._ui = OverlayWindow()
         ui = self._ui
         asr = self._build_asr()
-        mt = None if self.mode == "bilingual" else NllbMT(self.cfg.mt)
+        mt = None if self.mode == "bilingual" else self._build_mt()
 
         workers = [
             threading.Thread(target=self._prewarm, args=(asr, mt), daemon=True, name="prewarm"),
@@ -72,7 +76,13 @@ class Pipeline:
             return OpenVINOWhisperASR(self.cfg.openvino_asr)
         return WhisperASR(self.cfg.asr)
 
-    def _prewarm(self, asr: ASRWorker, mt: NllbMT | None) -> None:
+    def _build_mt(self) -> MTWorker:
+        if self.mt_backend == "ctranslate2":
+            from translate.mt.ct2 import CT2NllbMT
+            return CT2NllbMT(self.cfg.ct2_mt)
+        return NllbMT(self.cfg.mt)
+
+    def _prewarm(self, asr: ASRWorker, mt: MTWorker | None) -> None:
         asr_label = self._asr_label()
         log.info("prewarm: loading ASR (%s)", asr_label)
         t0 = time.monotonic()
@@ -80,7 +90,7 @@ class Pipeline:
         log.info("prewarm: ASR ready in %.1fs", time.monotonic() - t0)
 
         if mt is not None:
-            log.info("prewarm: loading MT model (%s)", self.cfg.mt.model_repo)
+            log.info("prewarm: loading MT (%s)", self._mt_label())
             t0 = time.monotonic()
             mt.prewarm()
             log.info("prewarm: MT ready in %.1fs", time.monotonic() - t0)
@@ -89,6 +99,11 @@ class Pipeline:
         if self.asr_backend == "openvino":
             return f"openvino:{self.cfg.openvino_asr.model} on {self.cfg.openvino_asr.device}"
         return f"ctranslate2:{self.cfg.asr.model} on {self.cfg.asr.device}"
+
+    def _mt_label(self) -> str:
+        if self.mt_backend == "ctranslate2":
+            return f"ctranslate2:{self.cfg.ct2_mt.model_repo} ({self.cfg.ct2_mt.compute_type}) on {self.cfg.ct2_mt.device}"
+        return f"torch:{self.cfg.mt.model_repo} on {self.cfg.mt.device}"
 
     def _capture_loop(self) -> None:
         capture = get_capture(self.cfg.audio.sample_rate, self.cfg.audio.frame_ms)
@@ -134,7 +149,7 @@ class Pipeline:
             except Exception:
                 log.exception("asr: transcribe failed, skipping chunk")
 
-    def _mt_loop(self, mt: NllbMT, ui: OverlayWindow) -> None:
+    def _mt_loop(self, mt: MTWorker, ui: OverlayWindow) -> None:
         while not self._stop.is_set():
             item = self._mt_q.get()
             if item is _STOP:
