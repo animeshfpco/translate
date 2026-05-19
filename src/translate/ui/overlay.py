@@ -1,4 +1,5 @@
 import sys
+from collections import deque
 
 from PySide6.QtCore import Qt, QObject, Signal
 from PySide6.QtGui import QTextCursor
@@ -53,23 +54,30 @@ class OverlayWindow(QObject):
         layout.addWidget(self._en)
 
         self._window.setCentralWidget(central)
+        self._pending_blocks: deque[int] = deque()
         self._ja_appended.connect(self._on_ja_appended)
         self._en_updated.connect(self._on_en_updated)
 
     def _on_ja_appended(self, ja: str) -> None:
         self._ja.appendPlainText(ja)
         self._en.appendPlainText(_PENDING)
+        # appendPlainText fills the initial empty block on the first call and
+        # appends a new block thereafter, so blockCount()-1 is the placeholder's index.
+        self._pending_blocks.append(self._en.blockCount() - 1)
 
     def _on_en_updated(self, en: str) -> None:
-        # Replace the last line in the EN pane (the "…" placeholder).
-        cursor = self._en.textCursor()
-        cursor.movePosition(QTextCursor.MoveOperation.End)
+        if not self._pending_blocks:
+            return
+        block_num = self._pending_blocks.popleft()
+        block = self._en.document().findBlockByNumber(block_num)
+        if not block.isValid():
+            return
+        cursor = QTextCursor(block)
         cursor.movePosition(
-            QTextCursor.MoveOperation.StartOfLine,
+            QTextCursor.MoveOperation.EndOfBlock,
             QTextCursor.MoveMode.KeepAnchor,
         )
         cursor.insertText(en)
-        self._en.setTextCursor(cursor)
 
     def append_ja(self, ja: str) -> None:
         """Show JA text immediately + a pending placeholder in the EN pane."""

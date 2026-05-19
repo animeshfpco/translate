@@ -34,13 +34,13 @@ class ASRConfig:
 
 @dataclass(frozen=True)
 class MTConfig:
-    # Translation-specialist seq2seq. Distilled 1.3B is the smallest variant
-    # that holds quality on JA→EN; 600M is faster but noticeably worse.
-    model_repo: str = "facebook/nllb-200-distilled-1.3B"
+    # 600M is the CPU-real-time default. 1.3B is higher quality but ~2× slower —
+    # use it only if MT can keep up with ASR on the target machine.
+    model_repo: str = "facebook/nllb-200-distilled-600M"
     src_lang: str = "jpn_Jpan"  # NLLB BCP-47 + script tag
     tgt_lang: str = "eng_Latn"
     device: str = "cpu"  # cpu | cuda | auto
-    num_beams: int = 4
+    num_beams: int = 1  # greedy; beam=4 is ~4× slower for marginal quality gain
     max_tokens: int = 256
 
 
